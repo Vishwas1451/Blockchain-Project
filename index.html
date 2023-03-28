@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Candiates</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container" style="width: 650px;">
+      <div class="row">
+        <div class="col-lg-12 text-center" >
+          <h1 >Educational Records</h1>
+          <hr/>
+          <br/>
+          <div id="content">
+            <h4 id="candidateName"></h4>
+            <hr/>
+            <form role="form">
+              <div class="form-group" style="display:inline;">
+                <div class="input-group">
+                  <input class="form-control input-lg" placeholder= "name" name="name" id ="inp1">
+                  </input>
+                  <input class="form-control input-lg" placeholder= "srn" name="srn" id ="inp2">
+                  </input>
+                  <input class="form-control input-lg" placeholder= "marks1" name="marks1" id ="inp3">
+                  </input>
+                  <input class="form-control input-lg" placeholder= "marks2" name="marks2" id ="inp4">
+                  </input>
+                  <input class="form-control input-lg" placeholder= "marks3" name="marks3" id ="inp5">
+                  </input>
+                  <input class="form-control input-lg" placeholder= "marks4" name="marks4" id ="inp6">
+                  </input> 
+        
+                  
+                </div>
+                <span class="input-group-btn">
+                  <button type="submit" class="btn btn-primary btn-lg" onPress={add} >Add Records</button>
+                </span>
+              </div>
+            </form>
+            <input class="form-control input-lg" name="retrieve" id ="inp7">
+            </input>
+            <button type="button" class="btn btn-primary btn-lg" onPress={GetInfo}>Get Information</button>
+                </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script>
+      // Initialize Web3
+      if (typeof web3 !== 'undefined') {
+        web3 = new Web3(web3.currentProvider);
+      } else {
+        web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:7545'));
+      }
+
+      // Set Account
+      web3.eth.defaultAccount = web3.eth.accounts[0];
+
+      // Set Contract Abi
+      var contractAbi = [
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "srn",
+				"type": "string"
+			}
+		],
+		"name": "getStudentInformation",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "srn",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "marks1",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "marks2",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "marks3",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "marks4",
+						"type": "string"
+					}
+				],
+				"internalType": "struct Election.student",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "srn",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "marks1",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "marks2",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "marks3",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "marks4",
+				"type": "string"
+			}
+		],
+		"name": "setStudentInformation",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+]; // Add Your Contract ABI here!!!
+
+      // Set Contract Address
+      var contractAddress = '0x5e44E360437b0bc162253EC10df76Af26138d4c0'; // Add Your Contract address here!!!
+
+      // Set the Contract
+      var contract = web3.eth.contract(contractAbi).at(contractAddress);
+      // Display Candidate Name
+      // contract.candidateName(function(err, candidateName) {
+      //   $('#name').html(candidateName);
+      // });
+      // contract.candidateName(function(err, candidateName) {
+      //   $('#srn').html(candidateName);
+      // });
+      // contract.candidateName(function(err, candidateName) {
+      //   $('#marks1').html(candidateName);
+      // });
+      // contract.candidateName(function(err, candidateName) {
+      //   $('#marks2').html(candidateName);
+      // });
+      // contract.candidateName(function(err, candidateName) {
+      //   $('#marks3').html(candidateName);
+      // });
+      // contract.candidateName(function(err, candidateName) {
+      //   $('#marks4').html(candidateName);
+      // });
+     // Change the Candidate Name
+      // $('form').on('submit', function(event) {
+      //   // event.preventDefault();
+      //   contract.setStudentInformation($('inp1').val(),$('inp2').val(),$('inp3').val(),$('inp4').val(),$('inp5').val(),$('inp6').val());
+      // })
+      function add(){
+      a = $("#inp1").val();
+      b = $("#inp2").val();
+      c = $("#inp3").val();
+      d = $("#inp4").val();
+      e = $("#inp5").val();
+      f = $("#inp6").val(); 
+      contract.methods.setStudentInformation(a,b,c,d,e,f).send({ from:"0xD92444A88A344De81bddB77DCa8013da235EfAA0"})
+            .then((receipt) => {
+                console.log(receipt);
+                alert('Registeration Verified');
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+          }      
+        function GetInfo() {
+            contract.methods.getInfo().call().then( function( info ) {
+              console.log("info: ", info);
+              document.getElementById('inp7').innerHTML = info;
+  });
+}
+    </script>
+  </body>
+</html>
