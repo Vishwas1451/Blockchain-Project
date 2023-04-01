@@ -46,22 +46,24 @@
                   
                 </div>
                 <span class="input-group-btn">
-                  <button type="submit" class="btn btn-primary btn-lg" onPress={add} >Add Records</button>
+                  <button type="button" class="btn btn-primary btn-lg" id="button1"  onclick="conf()">Add Records</button>
                 </span>
               </div>
             </form>
             <input class="form-control input-lg" name="retrieve" id ="inp7">
             </input>
-            <button type="button" class="btn btn-primary btn-lg" onPress={GetInfo}>Get Information</button>
+            <button type="button" class="btn btn-primary btn-lg" id = "button2" onclick="check()">Get Information</button>
                 </span>
           </div>
         </div>
       </div>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/web3.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+    <!-- <script src="js/bootstrap.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js"></script>
+    <script src = "https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
+    <!-- <script src="js/web3.min.js"></script> -->
     <script>
       // Initialize Web3
       if (typeof web3 !== 'undefined') {
@@ -167,10 +169,10 @@
 ]; // Add Your Contract ABI here!!!
 
       // Set Contract Address
-      var contractAddress = '0x5e44E360437b0bc162253EC10df76Af26138d4c0'; // Add Your Contract address here!!!
+      var contractAddress = '0xc1d4612aF05eA530cBd3A10fE48ee03d4521B2Ae'; // Add Your Contract address here!!!
 
       // Set the Contract
-      var contract = web3.eth.contract(contractAbi).at(contractAddress);
+      var contract = new web3.eth.Contract(contractAbi,contractAddress);
       // Display Candidate Name
       // contract.candidateName(function(err, candidateName) {
       //   $('#name').html(candidateName);
@@ -195,28 +197,73 @@
       //   // event.preventDefault();
       //   contract.setStudentInformation($('inp1').val(),$('inp2').val(),$('inp3').val(),$('inp4').val(),$('inp5').val(),$('inp6').val());
       // })
-      function add(){
-      a = $("#inp1").val();
-      b = $("#inp2").val();
-      c = $("#inp3").val();
-      d = $("#inp4").val();
-      e = $("#inp5").val();
-      f = $("#inp6").val(); 
-      contract.methods.setStudentInformation(a,b,c,d,e,f).send({ from:"0xD92444A88A344De81bddB77DCa8013da235EfAA0"})
+  //     function add(){
+  //     a = $("#inp1").val();
+  //     b = $("#inp2").val();
+  //     c = $("#inp3").val();
+  //     d = $("#inp4").val();
+  //     e = $("#inp5").val();
+  //     f = $("#inp6").val(); 
+  //     contract.methods.setStudentInformation(a,b,c,d,e,f).send({ from:"0xD92444A88A344De81bddB77DCa8013da235EfAA0"})
+  //           .then((receipt) => {
+  //               console.log(receipt);
+  //               alert('Registeration Verified');
+  //           })
+  //           .catch((error) => {
+  //               console.error(error);
+  //           });
+  //         }      
+  //       function GetInfo() {
+  //           contract.methods.getInfo().call().then( function( info ) {
+  //             console.log("info: ", info);
+  //             document.getElementById('inp7').innerHTML = info;
+  // });
+  
+// }
+  //  contract.methods.getStudentInformation($('inp7')).call().then(function(info){
+  //   $('inp1').html(info);
+  //  })
+   function check(){
+    var id = String(document.getElementById("inp7").value); 
+    console.log(id);
+    if(id!=""){
+    contract.methods.getStudentInformation(id).send({from:"0x56fba6097eFc7B3Ed0f8c50659cA3263f9861de4",gas:500000})
+      .then((resp) =>{
+         console.log(resp);
+         document.getElementById("inp3").value = resp;
+     })//.then(function(tx){
+    //   console.log(tx);
+    // }).catch(function(tx){
+    //   console.log(tx);
+    // })
+  }
+  else{
+    alert("it's empty");
+  }
+   }
+
+   function conf() {
+        var name = String(document.getElementById("inp1").value);
+        var srn = String(document.getElementById("inp2").value);
+        var marks1 = String(document.getElementById("inp3").value);
+        var marks2 = String(document.getElementById("inp4").value);
+        var marks3 = String(document.getElementById("inp5").value);
+        var marks4 =String(document.getElementById("inp6").value);
+        console.log(name)
+        if (name!="" & srn!="" & marks1!="" & marks2!="" & marks3!="" & marks4!=""){
+        contract.methods.setStudentInformation(name,srn,marks1,marks2,marks3,marks4).send({ from:"0x56fba6097eFc7B3Ed0f8c50659cA3263f9861de4",gas:500000})
             .then((receipt) => {
                 console.log(receipt);
-                alert('Registeration Verified');
+                alert('added to blockchain');
             })
             .catch((error) => {
                 console.error(error);
             });
-          }      
-        function GetInfo() {
-            contract.methods.getInfo().call().then( function( info ) {
-              console.log("info: ", info);
-              document.getElementById('inp7').innerHTML = info;
-  });
-}
+        }
+        else{
+          alert("no values");
+        }
+   }  
     </script>
   </body>
 </html>
