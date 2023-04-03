@@ -4,18 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Candiates</title>
-
-    <!-- Bootstrap -->
+    <title>Educational Records</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
   </head>
   <body>
     <div class="container" style="width: 650px;">
@@ -58,12 +48,8 @@
         </div>
       </div>
     </div>
-
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
-    <!-- <script src="js/bootstrap.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js"></script>
     <script src = "https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
-    <!-- <script src="js/web3.min.js"></script> -->
     <script>
       // Initialize Web3
       if (typeof web3 !== 'undefined') {
@@ -76,7 +62,45 @@
       web3.eth.defaultAccount = web3.eth.accounts[0];
 
       // Set Contract Abi
-      var contractAbi = [
+      var contractAbi =[
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "srn",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "marks1",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "marks2",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "marks3",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "marks4",
+				"type": "uint256"
+			}
+		],
+		"name": "setStudentInformation",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
 	{
 		"inputs": [
 			{
@@ -100,24 +124,24 @@
 						"type": "string"
 					},
 					{
-						"internalType": "string",
+						"internalType": "uint256",
 						"name": "marks1",
-						"type": "string"
+						"type": "uint256"
 					},
 					{
-						"internalType": "string",
+						"internalType": "uint256",
 						"name": "marks2",
-						"type": "string"
+						"type": "uint256"
 					},
 					{
-						"internalType": "string",
+						"internalType": "uint256",
 						"name": "marks3",
-						"type": "string"
+						"type": "uint256"
 					},
 					{
-						"internalType": "string",
+						"internalType": "uint256",
 						"name": "marks4",
-						"type": "string"
+						"type": "uint256"
 					}
 				],
 				"internalType": "struct Election.student",
@@ -127,116 +151,23 @@
 		],
 		"stateMutability": "view",
 		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "name",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "srn",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "marks1",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "marks2",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "marks3",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "marks4",
-				"type": "string"
-			}
-		],
-		"name": "setStudentInformation",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
 	}
 ]; // Add Your Contract ABI here!!!
 
       // Set Contract Address
-      var contractAddress = '0xb029fb683CeD5735250D5435eBAafccEC9b3b99f'; // Add Your Contract address here!!!
+      var contractAddress = '0x01b733F497F39aE6085AA8EB533c8e43FbBe1945'; // Add Your Contract address here!!!
 
       // Set the Contract
       var contract = new web3.eth.Contract(contractAbi,contractAddress);
-      // Display Candidate Name
-      // contract.candidateName(function(err, candidateName) {
-      //   $('#name').html(candidateName);
-      // });
-      // contract.candidateName(function(err, candidateName) {
-      //   $('#srn').html(candidateName);
-      // });
-      // contract.candidateName(function(err, candidateName) {
-      //   $('#marks1').html(candidateName);
-      // });
-      // contract.candidateName(function(err, candidateName) {
-      //   $('#marks2').html(candidateName);
-      // });
-      // contract.candidateName(function(err, candidateName) {
-      //   $('#marks3').html(candidateName);
-      // });
-      // contract.candidateName(function(err, candidateName) {
-      //   $('#marks4').html(candidateName);
-      // });
-     // Change the Candidate Name
-      // $('form').on('submit', function(event) {
-      //   // event.preventDefault();
-      //   contract.setStudentInformation($('inp1').val(),$('inp2').val(),$('inp3').val(),$('inp4').val(),$('inp5').val(),$('inp6').val());
-      // })
-  //     function add(){
-  //     a = $("#inp1").val();
-  //     b = $("#inp2").val();
-  //     c = $("#inp3").val();
-  //     d = $("#inp4").val();
-  //     e = $("#inp5").val();
-  //     f = $("#inp6").val(); 
-  //     contract.methods.setStudentInformation(a,b,c,d,e,f).send({ from:"0xD92444A88A344De81bddB77DCa8013da235EfAA0"})
-  //           .then((receipt) => {
-  //               console.log(receipt);
-  //               alert('Registeration Verified');
-  //           })
-  //           .catch((error) => {
-  //               console.error(error);
-  //           });
-  //         }      
-  //       function GetInfo() {
-  //           contract.methods.getInfo().call().then( function( info ) {
-  //             console.log("info: ", info);
-  //             document.getElementById('inp7').innerHTML = info;
-  // });
-  
-// }
-  //  contract.methods.getStudentInformation($('inp7')).call().then(function(info){
-  //   $('inp1').html(info);
-  //  })
-   function check(){
+    async function check(){
+    event.preventDefault();
     var id = String(document.getElementById("inp7").value); 
     console.log(id);
     if(id!=""){
-    contract.methods.getStudentInformation(id).send({from:"0xA60bacA75Ac913350546Da9520c3392A405cFb88",gas:500000})
-      .then((resp) =>{
-         console.log(resp);
-         document.getElementById("inp3").value = resp;
-     })//.then(function(tx){
-    //   console.log(tx);
-    // }).catch(function(tx){
-    //   console.log(tx);
-    // })
-  }
+      const p = await contract.methods.getStudentInformation(id).call({from:"0xA60bacA75Ac913350546Da9520c3392A405cFb88",gas:500000});
+      console.log(p[0]);
+      // document.getElementById("inp3").value = p;
+   }
   else{
     alert("it's empty");
   }
