@@ -169,7 +169,7 @@
 ]; // Add Your Contract ABI here!!!
 
       // Set Contract Address
-      var contractAddress = '0xc1d4612aF05eA530cBd3A10fE48ee03d4521B2Ae'; // Add Your Contract address here!!!
+      var contractAddress = '0xb029fb683CeD5735250D5435eBAafccEC9b3b99f'; // Add Your Contract address here!!!
 
       // Set the Contract
       var contract = new web3.eth.Contract(contractAbi,contractAddress);
@@ -227,7 +227,7 @@
     var id = String(document.getElementById("inp7").value); 
     console.log(id);
     if(id!=""){
-    contract.methods.getStudentInformation(id).send({from:"0x56fba6097eFc7B3Ed0f8c50659cA3263f9861de4",gas:500000})
+    contract.methods.getStudentInformation(id).send({from:"0xA60bacA75Ac913350546Da9520c3392A405cFb88",gas:500000})
       .then((resp) =>{
          console.log(resp);
          document.getElementById("inp3").value = resp;
@@ -251,7 +251,7 @@
         var marks4 =String(document.getElementById("inp6").value);
         console.log(name)
         if (name!="" & srn!="" & marks1!="" & marks2!="" & marks3!="" & marks4!=""){
-        contract.methods.setStudentInformation(name,srn,marks1,marks2,marks3,marks4).send({ from:"0x56fba6097eFc7B3Ed0f8c50659cA3263f9861de4",gas:500000})
+        contract.methods.setStudentInformation(name,srn,marks1,marks2,marks3,marks4).send({ from:"0xA60bacA75Ac913350546Da9520c3392A405cFb88",gas:500000})
             .then((receipt) => {
                 console.log(receipt);
                 alert('added to blockchain');
