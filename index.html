@@ -10,8 +10,8 @@
   <body>
     <div class="container" style="width: 650px;">
       <div class="row">
-        <div class="col-lg-12 text-center" >
-          <h1 >Educational Records</h1>
+        <div class="col-lg-12" >
+          <h1 class="text-center">Educational Records</h1>
           <hr/>
           <br/>
           <div id="content">
@@ -20,31 +20,58 @@
             <form role="form">
               <div class="form-group" style="display:inline;">
                 <div class="input-group">
+		  <label>Student Name: </label>
                   <input class="form-control input-lg" placeholder= "name" name="name" id ="inp1">
                   </input>
+		  <br>
+		  <label>SRN: </label>
                   <input class="form-control input-lg" placeholder= "srn" name="srn" id ="inp2">
                   </input>
+		  <br>
+		  <label>Subject_1 Marks: </label>
                   <input class="form-control input-lg" placeholder= "marks1" name="marks1" id ="inp3">
                   </input>
+		  <br>
+		  <label>Subject_2 Marks: </label>
                   <input class="form-control input-lg" placeholder= "marks2" name="marks2" id ="inp4">
                   </input>
+		  <br>
+		  <label>Subject_3 Marks: </label>
                   <input class="form-control input-lg" placeholder= "marks3" name="marks3" id ="inp5">
                   </input>
+		  <br>
+		  <label>Subject_4 Name: </label>
                   <input class="form-control input-lg" placeholder= "marks4" name="marks4" id ="inp6">
-                  </input> 
-        
-                  
+                  </input>
+		  <br>
+		  <label>Subject_5 Name: </label>
+                  <input class="form-control input-lg" placeholder= "marks5" name="marks5" id ="inp7">
+                  </input>
+		  <br>
                 </div>
-                <span class="input-group-btn">
+		  <br>
                   <button type="button" class="btn btn-primary btn-lg" id="button1"  onclick="conf()">Add Records</button>
                 </span>
               </div>
             </form>
-            <input class="form-control input-lg" name="retrieve" id ="inp7">
+	    <br>
+	    <label>Get Student Records</label>
+	    <br>
+	    <label>Enter SRN:</label>
+	    <br>
+            <input class="form-control input-lg" name="retrieve" id ="inp8">
             </input>
+	    <br>
             <button type="button" class="btn btn-primary btn-lg" id = "button2" onclick="check()">Get Information</button>
-                </span>
+	    <br>
           </div>
+	    <div id = "name"></div>
+	    <div id = "srn"></div>
+	    <div id = "m1"></div>
+	    <div id = "m2"></div>
+	    <div id = "m3"></div>
+	    <div id = "m4"></div>
+	    <div id = "m5"></div>
         </div>
       </div>
     </div>
@@ -62,7 +89,7 @@
       web3.eth.defaultAccount = web3.eth.accounts[0];
 
       // Set Contract Abi
-      var contractAbi =[
+      var contractAbi = [
 	{
 		"inputs": [
 			{
@@ -76,24 +103,29 @@
 				"type": "string"
 			},
 			{
-				"internalType": "uint256",
+				"internalType": "string",
 				"name": "marks1",
-				"type": "uint256"
+				"type": "string"
 			},
 			{
-				"internalType": "uint256",
+				"internalType": "string",
 				"name": "marks2",
-				"type": "uint256"
+				"type": "string"
 			},
 			{
-				"internalType": "uint256",
+				"internalType": "string",
 				"name": "marks3",
-				"type": "uint256"
+				"type": "string"
 			},
 			{
-				"internalType": "uint256",
+				"internalType": "string",
 				"name": "marks4",
-				"type": "uint256"
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "marks5",
+				"type": "string"
 			}
 		],
 		"name": "setStudentInformation",
@@ -112,61 +144,36 @@
 		"name": "getStudentInformation",
 		"outputs": [
 			{
-				"components": [
-					{
-						"internalType": "string",
-						"name": "name",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "srn",
-						"type": "string"
-					},
-					{
-						"internalType": "uint256",
-						"name": "marks1",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "marks2",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "marks3",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "marks4",
-						"type": "uint256"
-					}
-				],
-				"internalType": "struct Election.student",
+				"internalType": "string",
 				"name": "",
-				"type": "tuple"
+				"type": "string"
 			}
 		],
 		"stateMutability": "view",
 		"type": "function"
 	}
-]; // Add Your Contract ABI here!!!
+]
+ // Add Your Contract ABI here!!!
 
       // Set Contract Address
-      var contractAddress = '0x01b733F497F39aE6085AA8EB533c8e43FbBe1945'; // Add Your Contract address here!!!
+      var contractAddress = '0x7EF2e0048f5bAeDe046f6BF797943daF4ED8CB47'; // Add Your Contract address here!!!
 
       // Set the Contract
       var contract = new web3.eth.Contract(contractAbi,contractAddress);
     async function check(){
     event.preventDefault();
-    var id = String(document.getElementById("inp7").value); 
+    var id = String(document.getElementById("inp8").value);
     console.log(id);
     if(id!=""){
-      const p = await contract.methods.getStudentInformation(id).call({from:"0xA60bacA75Ac913350546Da9520c3392A405cFb88",gas:500000});
+      const p = await contract.methods.getStudentInformation(id).call({from:"0xc13d398399a36273B8397bb345d1Fd0210720ba1",gas:500000});
       console.log(p[0]);
-      // document.getElementById("inp3").value = p;
+      document.getElementById("name").value = p[0];
+      document.getElementById("srn").value = p[1];
+      document.getElementById("m1").value = p[2];
+      document.getElementById("m2").value = p[3];
+      document.getElementById("m3").value = p[4];
+      document.getElementById("m4").value = p[5];
+      document.getElementById("m5").value = p[6];
    }
   else{
     alert("it's empty");
@@ -179,10 +186,11 @@
         var marks1 = String(document.getElementById("inp3").value);
         var marks2 = String(document.getElementById("inp4").value);
         var marks3 = String(document.getElementById("inp5").value);
-        var marks4 =String(document.getElementById("inp6").value);
+        var marks4 = String(document.getElementById("inp6").value);
+        var marks5 = String(document.getElementById("inp7").value);
         console.log(name)
-        if (name!="" & srn!="" & marks1!="" & marks2!="" & marks3!="" & marks4!=""){
-        contract.methods.setStudentInformation(name,srn,marks1,marks2,marks3,marks4).send({ from:"0xA60bacA75Ac913350546Da9520c3392A405cFb88",gas:500000})
+        if (name!="" & srn!="" & marks1!="" & marks2!="" & marks3!="" & marks4!="" & marks5 != ""){
+        contract.methods.setStudentInformation(name, srn, marks1, marks2, marks3, marks4, marks5).send({ from:"0xc13d398399a36273B8397bb345d1Fd0210720ba1",gas:500000})
             .then((receipt) => {
                 console.log(receipt);
                 alert('added to blockchain');
