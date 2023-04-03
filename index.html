@@ -4,78 +4,72 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Educational Records</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+	<link rel = "stylesheet" href = "./index.css"/>
+	<title>Educational Records</title>
   </head>
   <body>
-    <div class="container" style="width: 650px;">
-      <div class="row">
-        <div class="col-lg-12" >
-          <h1 class="text-center">Educational Records</h1>
-          <hr/>
-          <br/>
-          <div id="content">
-            <h4 id="candidateName"></h4>
-            <hr/>
-            <form role="form">
-              <div class="form-group" style="display:inline;">
-                <div class="input-group">
-		  <label>Student Name: </label>
-                  <input class="form-control input-lg" placeholder= "name" name="name" id ="inp1">
-                  </input>
-		  <br>
-		  <label>SRN: </label>
-                  <input class="form-control input-lg" placeholder= "srn" name="srn" id ="inp2">
-                  </input>
-		  <br>
-		  <label>Subject_1 Marks: </label>
-                  <input class="form-control input-lg" placeholder= "marks1" name="marks1" id ="inp3">
-                  </input>
-		  <br>
-		  <label>Subject_2 Marks: </label>
-                  <input class="form-control input-lg" placeholder= "marks2" name="marks2" id ="inp4">
-                  </input>
-		  <br>
-		  <label>Subject_3 Marks: </label>
-                  <input class="form-control input-lg" placeholder= "marks3" name="marks3" id ="inp5">
-                  </input>
-		  <br>
-		  <label>Subject_4 Name: </label>
-                  <input class="form-control input-lg" placeholder= "marks4" name="marks4" id ="inp6">
-                  </input>
-		  <br>
-		  <label>Subject_5 Name: </label>
-                  <input class="form-control input-lg" placeholder= "marks5" name="marks5" id ="inp7">
-                  </input>
-		  <br>
-                </div>
-		  <br>
-                  <button type="button" class="btn btn-primary btn-lg" id="button1"  onclick="conf()">Add Records</button>
-                </span>
-              </div>
+    	<h1 class="text-center">Educational Records</h1>
+        <div>          
+          <div id="content1">
+            <form role="form" class="form1">
+                <!-- <div class="input-group"> -->
+					<label class="labelx">Enter Student Details: </label>
+					<div id = "side1">
+						
+						<label class="label1">Student Name: </label>
+						<br>
+						<input placeholder= "Student Name" name="name" id ="inp1" class="label1 inp"></input>
+						<br><br>
+						<label class="label1">SRN: </label>
+						<br>
+						<input placeholder= "SRN" name="srn" id ="inp2" class="label1 inp"></input>
+						<br><br>
+						<label class="label1">Mathematics: </label>
+						<br>
+						<input placeholder= "Mathematics" name="marks1" id ="inp3" class="label1 inp"></input>
+						<br><br>
+					</div>
+					<div id = "side2">
+						<label class="label1">Science: </label>
+						<br>
+						<input placeholder= "Science" name="marks2" id ="inp4" class="label1 inp"></input>
+						<br><br>
+						<label class="label1">English: </label>
+						<br>
+						<input placeholder= "English" name="marks3" id ="inp5" class="label1 inp"></input>
+						<br><br>
+						<label class="label1">Social Science: </label>
+						<br>
+						<input placeholder= "Social Science" name="marks4" id ="inp6" class="label1 inp"></input>
+						<br><br>
+						<label class="label1">Computer Science: </label>
+						<br>
+						<input placeholder= "Computer Science" name="marks5" id ="inp7" class="label1 inp"></input>
+					</div>
+					<!-- <br> -->
+					<br>
+                	<button type="button" id="button1" class="label1 inp addbutton" onclick="conf()">Add Records</button>
             </form>
+		</div>
+
+		<div id = "content2">
+	    <label class = "label2">Get Student Records: </label>
+	    <br><br>
+	    <label class = "label2">Enter Student SRN:</label>
 	    <br>
-	    <label>Get Student Records</label>
-	    <br>
-	    <label>Enter SRN:</label>
-	    <br>
-            <input class="form-control input-lg" name="retrieve" id ="inp8">
-            </input>
-	    <br>
-            <button type="button" class="btn btn-primary btn-lg" id = "button2" onclick="check()">Get Information</button>
-	    <br>
-          </div>
-	  <div style="text-align:right">
-	    <div id = "name"></div>
-	    <div id = "srn"></div>
-	    <div id = "m1"></div>
-	    <div id = "m2"></div>
-	    <div id = "m3"></div>
-	    <div id = "m4"></div>
-	    <div id = "m5"></div>
-        </div>
+        <input name="retrieve" id ="inp8" class="label2 inp" placeholder="Student SRN"></input>
+	    <br><br>
+        <button type="button" id = "button2" class="label2 inp" onclick="check()">Get Information</button>
+		<br><br>
+	    <div id = "name" class="label2"></div>
+	    <div id = "srn" class="label2"></div>
+	    <div id = "m1" class="label2"></div>
+	    <div id = "m2" class="label2"></div>
+	    <div id = "m3" class="label2"></div>
+	    <div id = "m4" class="label2"></div>
+	    <div id = "m5" class="label2"></div>
 	</div>
-      </div>
+      
     </div>
     <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js"></script>
     <script src = "https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
@@ -195,7 +189,7 @@
  // Add Your Contract ABI here!!!
 
       // Set Contract Address
-      var contractAddress = '0xaB51BC965D3641bf6cc2633746c7dA76473BDf60'; // Add Your Contract address here!!!
+      var contractAddress = '0xCcf50940E7d94A3998d707E0423ff819B035A8Ec'; // Add Your Contract address here!!!
 
       // Set the Contract
       var contract = new web3.eth.Contract(contractAbi,contractAddress);
@@ -204,15 +198,15 @@
     var id = String(document.getElementById("inp8").value);
     console.log(id);
     if(id!=""){
-      const p = await contract.methods.getStudentInformation(id).call({from:"0xc13d398399a36273B8397bb345d1Fd0210720ba1",gas:500000});
+      const p = await contract.methods.getStudentInformation(id).call({from:"0xFB6d665A66004604636dbB66CB8E427c5Fe27d6a",gas:500000});
       console.log(p[0],p[1],p[2],p[3],p[4],p[5],p[6]);
       document.getElementById("name").innerText = "Student Name: " + p[0];
       document.getElementById("srn").innerText = "SRN: " + p[1];
-      document.getElementById("m1").innerText = "Subj_1 Marks: " + p[2];
-      document.getElementById("m2").innerText = "Subj_2 Marks: " + p[3];
-      document.getElementById("m3").innerText = "Subj_3 Marks: " + p[4];
-      document.getElementById("m4").innerText = "Subj_4 Marks: " + p[5];
-      document.getElementById("m5").innerText = "Subj_5 Marks: " + p[6];
+      document.getElementById("m1").innerText = "Mathematics: " + p[2];
+      document.getElementById("m2").innerText = "Science: " + p[3];
+      document.getElementById("m3").innerText = "English: " + p[4];
+      document.getElementById("m4").innerText = "Social Science: " + p[5];
+      document.getElementById("m5").innerText = "Computer Science: " + p[6];
    }
   else{
     alert("it's empty");
@@ -229,7 +223,7 @@
         var marks5 = String(document.getElementById("inp7").value);
         console.log(name)
         if (name!="" & srn!="" & marks1!="" & marks2!="" & marks3!="" & marks4!="" & marks5 != ""){
-        contract.methods.setStudentInformation(name, srn, marks1, marks2, marks3, marks4, marks5).send({ from:"0xc13d398399a36273B8397bb345d1Fd0210720ba1",gas:500000})
+        contract.methods.setStudentInformation(name, srn, marks1, marks2, marks3, marks4, marks5).send({ from:"0xFB6d665A66004604636dbB66CB8E427c5Fe27d6a",gas:500000})
             .then((receipt) => {
                 console.log(receipt);
                 alert('added to blockchain');
