@@ -1,7 +1,7 @@
 pragma solidity ^0.8.18;
 //SPDX-License-Identifier:MIT
 
-contract Election {
+contract Student_Record {
     struct student{
         string name;
         string srn;
