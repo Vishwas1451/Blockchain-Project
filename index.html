@@ -69,8 +69,7 @@
 	    <div id = "m4" class="label2"></div>
 	    <div id = "m5" class="label2"></div>
 	</div>
-      
-    </div>
+
     <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js"></script>
     <script src = "https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
     <script>
@@ -86,6 +85,98 @@
 
       // Set Contract Abi
       var contractAbi = [
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "stud_srn",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "password",
+				"type": "string"
+			}
+		],
+		"name": "addUser",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "srn",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "marks1",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "marks2",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "marks3",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "marks4",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "marks5",
+				"type": "uint256"
+			}
+		],
+		"name": "setStudentInformation",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "srn",
+				"type": "string"
+			}
+		],
+		"name": "getSignupDetails",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "stud_srn",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "password",
+						"type": "string"
+					}
+				],
+				"internalType": "struct Student_Record.details",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
 	{
 		"inputs": [
 			{
@@ -141,79 +232,36 @@
 		],
 		"stateMutability": "view",
 		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "name",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "srn",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "marks1",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "marks2",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "marks3",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "marks4",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "marks5",
-				"type": "uint256"
-			}
-		],
-		"name": "setStudentInformation",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
 	}
 ]
  // Add Your Contract ABI here!!!
 
       // Set Contract Address
-      var contractAddress = '0xCcf50940E7d94A3998d707E0423ff819B035A8Ec'; // Add Your Contract address here!!!
+    var contractAddress = '0xFc8Af21745f24B0353AD705B499a5f562e457CCC'; // Add Your Contract address here!!!
 
       // Set the Contract
-      var contract = new web3.eth.Contract(contractAbi,contractAddress);
-    async function check(){
-    event.preventDefault();
-    var id = String(document.getElementById("inp8").value);
-    console.log(id);
-    if(id!=""){
-      const p = await contract.methods.getStudentInformation(id).call({from:"0xFB6d665A66004604636dbB66CB8E427c5Fe27d6a",gas:500000});
-      console.log(p[0],p[1],p[2],p[3],p[4],p[5],p[6]);
-      document.getElementById("name").innerText = "Student Name: " + p[0];
-      document.getElementById("srn").innerText = "SRN: " + p[1];
-      document.getElementById("m1").innerText = "Mathematics: " + p[2];
-      document.getElementById("m2").innerText = "Science: " + p[3];
-      document.getElementById("m3").innerText = "English: " + p[4];
-      document.getElementById("m4").innerText = "Social Science: " + p[5];
-      document.getElementById("m5").innerText = "Computer Science: " + p[6];
-   }
-  else{
-    alert("it's empty");
-  }
-   }
+    var contract = new web3.eth.Contract(contractAbi,contractAddress);
+    async function check() {
+		event.preventDefault();
+		var id = String(document.getElementById("inp8").value);
+		console.log(id);
+		if(id!=""){
+		const p = await contract.methods.getStudentInformation(id).call({from:"0x4Be0Bdc84ce5228E9e326ea3645a8CBf78b543D5",gas:500000});
+		console.log(p[0],p[1],p[2],p[3],p[4],p[5],p[6]);
+		document.getElementById("name").innerText = "Student Name: " + p[0];
+		document.getElementById("srn").innerText = "SRN: " + p[1];
+		document.getElementById("m1").innerText = "Mathematics: " + p[2];
+		document.getElementById("m2").innerText = "Science: " + p[3];
+		document.getElementById("m3").innerText = "English: " + p[4];
+		document.getElementById("m4").innerText = "Social Science: " + p[5];
+		document.getElementById("m5").innerText = "Computer Science: " + p[6];
+		}
+		else{
+			alert("it's empty");
+		}
+    }
 
-   function conf() {
+    function conf() {
         var name = String(document.getElementById("inp1").value);
         var srn = String(document.getElementById("inp2").value);
         var marks1 = String(document.getElementById("inp3").value);
@@ -223,7 +271,7 @@
         var marks5 = String(document.getElementById("inp7").value);
         console.log(name)
         if (name!="" & srn!="" & marks1!="" & marks2!="" & marks3!="" & marks4!="" & marks5 != ""){
-        contract.methods.setStudentInformation(name, srn, marks1, marks2, marks3, marks4, marks5).send({ from:"0xFB6d665A66004604636dbB66CB8E427c5Fe27d6a",gas:500000})
+        contract.methods.setStudentInformation(name, srn, marks1, marks2, marks3, marks4, marks5).send({ from:"0x4Be0Bdc84ce5228E9e326ea3645a8CBf78b543D5",gas:500000})
             .then((receipt) => {
                 console.log(receipt);
                 alert('added to blockchain');
@@ -235,7 +283,7 @@
         else{
           alert("no values");
         }
-   }  
+    }
     </script>
   </body>
 </html>

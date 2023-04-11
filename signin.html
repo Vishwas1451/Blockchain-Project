@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- <link rel = "stylesheet" href = "./index.css"/> -->
+	<title>Educational Records</title>
+  </head>
+  <body>
+    	<h1 class="text-center">Student Login</h1>
+        <div>
+            <form id = "form">
+                <div>
+                    <label>
+                        Enter Student SRN:
+                    </label>
+                    <input placeholder="Enter SRN" id="inp9"></input>
+                    <label>
+                        Enter password:
+                    </label>
+                    <input type="password" placeholder="Enter password" id="inp10"></input>
+                    <br><br>
+                    <button type ="button" id="button1" class="label1 inp addbutton" onclick="signin()">Sign In</button>
+                </div>
+            </form>
+	    </div>
+        <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js"></script>
+        <script src = "https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
+        <script>
+        // Initialize Web3
+        if (typeof web3 !== 'undefined') {
+            web3 = new Web3(web3.currentProvider);
+        } else {
+            web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:7545'));
+        }
+
+        // Set Account
+        web3.eth.defaultAccount = web3.eth.accounts[0];
+
+        // Set Contract Abi
+        var contractAbi = [
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "stud_srn",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "password",
+				"type": "string"
+			}
+		],
+		"name": "addUser",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "srn",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "marks1",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "marks2",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "marks3",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "marks4",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "marks5",
+				"type": "uint256"
+			}
+		],
+		"name": "setStudentInformation",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "srn",
+				"type": "string"
+			}
+		],
+		"name": "getSignupDetails",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "stud_srn",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "password",
+						"type": "string"
+					}
+				],
+				"internalType": "struct Student_Record.details",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "srn",
+				"type": "string"
+			}
+		],
+		"name": "getStudentInformation",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "srn",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "marks1",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "marks2",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "marks3",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "marks4",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "marks5",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct Student_Record.student",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
+
+    // Add Your Contract ABI here!!!
+
+        // Set Contract Address
+        var contractAddress = '0xFc8Af21745f24B0353AD705B499a5f562e457CCC'; // Add Your Contract address here!!!
+
+        // Set the Contract
+        var contract = new web3.eth.Contract(contractAbi,contractAddress);
+        async function signin() {
+            var srn = String(document.getElementById("inp9").value);
+            var password = String(document.getElementById("inp10").value);
+            console.log(srn, password);
+            if (srn != "" && password != "") {
+                const p = await contract.methods.getSignupDetails(srn).call({from:"0x4Be0Bdc84ce5228E9e326ea3645a8CBf78b543D5",gas:500000});
+                // console.log(p, typeof(p));
+                if (p[0] == "" && p[1] == "") {
+                    alert("invalid user");
+                }
+                else if (p[0] != srn || p[1] != password) {
+                    alert("invalid credentials");
+                }
+                else {
+                    location.href = 'file:///C:/Users/Vishwa/Documents/Vishwa_PES/Sem6_Projects/Educational_Record_Storage/info.html?srn='+encodeURIComponent(srn);
+                }
+            }
+            else{
+            alert("no values");
+            }
+        }
+    </script>
+  </body>
+</html>
