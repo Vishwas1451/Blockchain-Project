@@ -1,0 +1,53 @@
+.text-center {
+    text-align: center;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+}
+body {
+    background-color: black;
+    overflow: auto;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bolder;
+}
+.form1 {
+    overflow: auto;
+}
+#content1 {
+    height: 80%;
+    width: 95%;
+    position: fixed;
+    overflow-x: hidden;
+    overflow-y: auto;
+    left: 0;
+    padding-top: 20px;
+    margin-left: 2.5%;
+    background-color: #1eb1c1;
+    border-radius: 50px;
+}
+
+.label2, .label1 {
+    margin-left: 15%;
+    font-size: x-large;
+    font-weight: bold;
+    overflow: auto;
+}
+
+.inp {
+    font-size: large;
+    overflow: auto;
+    margin-left: 30px;
+}
+
+.addbutton{
+    margin-top: 10%;
+    margin-left: 50%;
+}
+
+::placeholder {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+button {
+    font-family: 'Courier New', Courier, monospace;
+}
