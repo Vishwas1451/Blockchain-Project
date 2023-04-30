@@ -186,7 +186,7 @@
     // Add Your Contract ABI here!!!
 
         // Set Contract Address
-        var contractAddress = '0xFc8Af21745f24B0353AD705B499a5f562e457CCC'; // Add Your Contract address here!!!
+        var contractAddress = ''; // Add Your Contract address here
 
         // Set the Contract
         var contract = new web3.eth.Contract(contractAbi,contractAddress);
@@ -205,7 +205,7 @@
         async function signin() {
             console.log(srn);
             if (srn != "") {
-                const p = await contract.methods.getStudentInformation(srn).call({from:"0x4Be0Bdc84ce5228E9e326ea3645a8CBf78b543D5",gas:500000});
+                const p = await contract.methods.getStudentInformation(srn).call({from:"",gas:500000}); //Enter Ganache Wallet Address here
                 document.getElementById("name").innerText = "Student Name: " + p[0];
                 document.getElementById("srn").innerText = "SRN: " + p[1];
                 document.getElementById("m1").innerText = "Mathematics: " + p[2];

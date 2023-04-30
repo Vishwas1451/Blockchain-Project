@@ -237,7 +237,7 @@
  // Add Your Contract ABI here!!!
 
       // Set Contract Address
-    var contractAddress = '0xFc8Af21745f24B0353AD705B499a5f562e457CCC'; // Add Your Contract address here!!!
+    var contractAddress = ''; // Add Your Contract address here
 
       // Set the Contract
     var contract = new web3.eth.Contract(contractAbi,contractAddress);
@@ -246,7 +246,7 @@
 		var id = String(document.getElementById("inp8").value);
 		console.log(id);
 		if(id!=""){
-		const p = await contract.methods.getStudentInformation(id).call({from:"0x4Be0Bdc84ce5228E9e326ea3645a8CBf78b543D5",gas:500000});
+		const p = await contract.methods.getStudentInformation(id).call({from:"",gas:500000}); //Enter Ganache Wallet Address here
 		console.log(p[0],p[1],p[2],p[3],p[4],p[5],p[6]);
 		document.getElementById("name").innerText = "Student Name: " + p[0];
 		document.getElementById("srn").innerText = "SRN: " + p[1];
@@ -271,7 +271,7 @@
         var marks5 = String(document.getElementById("inp7").value);
         console.log(name)
         if (name!="" & srn!="" & marks1!="" & marks2!="" & marks3!="" & marks4!="" & marks5 != ""){
-        contract.methods.setStudentInformation(name, srn, marks1, marks2, marks3, marks4, marks5).send({ from:"0x4Be0Bdc84ce5228E9e326ea3645a8CBf78b543D5",gas:500000})
+        contract.methods.setStudentInformation(name, srn, marks1, marks2, marks3, marks4, marks5).send({ from:"",gas:500000}) //Enter Ganache Wallet Address here
             .then((receipt) => {
                 console.log(receipt);
                 alert('added to blockchain');
